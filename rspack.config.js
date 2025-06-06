@@ -13,7 +13,7 @@ export default defineConfig({
     main: "./src/main.tsx",
   },
   resolve: {
-    extensions: ["...", ".ts", ".tsx", ".jsx"],
+    extensions: ["...", ".ts", ".scss", ".tsx", ".jsx"],
   },
   module: {
     rules: [
@@ -21,13 +21,14 @@ export default defineConfig({
       {
         test: /\.(sass|scss|css)$/i,
         use: [
+          // ✅
+          // "style-loader",
+
+          // ❌
           rspack.CssExtractRspackPlugin.loader,
+
           {
             loader: "css-loader",
-            options: {
-              // ? 无效
-              modules: true,
-            },
           },
           {
             loader: "postcss-loader",
@@ -47,7 +48,7 @@ export default defineConfig({
             },
           },
         ],
-        // ? 无效
+        // ?
         type: "javascript/auto",
       },
 
@@ -86,11 +87,8 @@ export default defineConfig({
       template: "./index.html",
     }),
 
-    // + 独立css
-    new rspack.CssExtractRspackPlugin({
-      filename: "static/css/[name].[contenthash].css", // 输出文件的文件名
-      chunkFilename: "static/css/async/[name].[contenthash].css", // 异步加载的文件
-    }),
+    // ! bug?
+    new rspack.CssExtractRspackPlugin(),
 
     isDev ? new ReactRefreshRspackPlugin() : null,
   ].filter(Boolean),

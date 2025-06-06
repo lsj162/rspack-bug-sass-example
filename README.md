@@ -22,7 +22,6 @@ Build the app for production:
 npm run build
 ```
 
-# 测试
+# test
 
-pnpm add sass-embedded sass-loader -D
-pnpm add css-loader postcss-loader -D
+pnpm add sass-embedded sass-loader css-loader postcss-loader style-loader -D
