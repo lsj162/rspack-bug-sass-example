@@ -16,6 +16,18 @@ export default defineConfig({
     extensions: ["...", ".ts", ".scss", ".tsx", ".jsx"],
   },
   module: {
+    parser: {
+      "css/auto": {
+        namedExports: false,
+      },
+    },
+
+    generator: {
+      "css/auto": {
+        esModule: true,
+      },
+    },
+
     rules: [
       // +
       {
@@ -24,7 +36,7 @@ export default defineConfig({
           // ✅
           // "style-loader",
 
-          // ❌
+          // ❌ Bug
           rspack.CssExtractRspackPlugin.loader,
 
           {
@@ -102,7 +114,7 @@ export default defineConfig({
   },
 
   // -
-  // experiments: {
-  //   css: true,
-  // },
+  experiments: {
+    css: true,
+  },
 });
